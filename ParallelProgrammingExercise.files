@@ -1,0 +1,8 @@
+assignment1/student/histogram_par.c
+assignment1/histogram.c
+assignment1/histogram.h
+assignment1/histogram_ref.c
+assignment1/histogram_ref.h
+assignment1/histogram_seq.c
+assignment1/main.c
+assignment1/unit_test.c
