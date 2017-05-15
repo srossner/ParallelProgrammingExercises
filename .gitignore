@@ -1,3 +1,4 @@
+*.user
 *.o
 *.d
 assignment1/student/*
