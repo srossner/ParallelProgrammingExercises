@@ -6,3 +6,11 @@ assignment1/histogram_ref.h
 assignment1/histogram_seq.c
 assignment1/main.c
 assignment1/unit_test.c
+assignment2/student/histogram_par.c
+assignment2/histogram.c
+assignment2/histogram.h
+assignment2/histogram_ref.c
+assignment2/histogram_ref.h
+assignment2/histogram_seq.c
+assignment2/main.c
+assignment2/unit_test.c
