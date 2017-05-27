@@ -1,15 +1,11 @@
 #include "histogram.h"
-#include <cstdlib>
-#include <ctype.h>
-#include <thread>
-#include <mutex>
-#include <vector>
-#include <condition_variable>
-#include <list>
 #include "names.h"
-#include <stdlib.h>
 
-#include <iostream>
+#include <future>
+#include <thread>
+#include <vector>
+#include <algorithm>
+
 
 
 
@@ -152,57 +148,18 @@ void countNames(int numberOfBlocks, char* buffer, int* histogram)
 
 
 
-#define NumberOfBlocks 32
 
-void get_histogram(char *buffer, int* histogram, int num_threads)
+
+
+void get_histogram(const std::vector<word_t>& words, histogram_t& histogram, int num_threads)
 {
-
-    ThreadPool tpool(num_threads);
-
-    int numberOfBlocks;
-
-
-    while(buffer[0]!=TERMINATOR)
+    std::vector<std::thread> threads(nofthreads);
+    for_each(begin(words), end(words), [&histogram](const word_t& word)
     {
-        char *buffer_ = &buffer[0];
-
-        for(numberOfBlocks = 0 ; numberOfBlocks < NumberOfBlocks ; numberOfBlocks++)
-        {
-            if(buffer[0]==TERMINATOR)
-                break;
-
-            buffer = &buffer[CHUNKSIZE];
-
-        }
-
-
-        tpool.submit([=](int* histogram_) { countNames( numberOfBlocks, buffer_, histogram_); });
-
-    }
-
-    tpool.start();
-
-
-    tpool.getAll(histogram);
+        int res = getNameIndex(word.data());
+        if (res != -1) histogram[res]++;
+    });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -1,6 +1,6 @@
 NAME = histogram
-CC = g++ 
-CFLAGS = -std=c++11 -pthread -fstrict-overflow -Werror -Wall -Wshadow -Wstrict-overflow=5 -pedantic -fno-omit-frame-pointer -g
+CC = g++
+CFLAGS = -std=c++14 -fstrict-overflow -Werror -Wall -Wshadow -Wstrict-overflow=5 -pedantic
 LDFLAGS = -pthread -I$(CURDIR)
 
 #error if student directory is not set
@@ -14,11 +14,11 @@ ifeq ($(mode),debug)
 	CFLAGS += -O0 -g
 else
 	mode = release
-	CFLAGS += -O2 -g
+	CFLAGS += -O2
 endif
 
 VPATH = $(SDIR)
-SRC = $(wildcard *.c) $(wildcard */*.c)
+SRC = $(wildcard *.cpp) $(wildcard */*.cpp)
 
 OBJ_SEQ = $(SDIR)/main.o $(SDIR)/names.o $(SDIR)/$(NAME).o $(SDIR)/$(NAME)_seq.o
 OBJ_PAR = $(SDIR)/main.o $(SDIR)/names.o $(SDIR)/$(NAME).o $(SDIR)/$(NAME)_par.o
@@ -44,7 +44,7 @@ $(SDIR)/$(NAME)_par : $(OBJ_PAR)
 $(SDIR)/unit_test: $(OBJ_UNIT)
 	$(CC) -o $@ $(OBJ_UNIT) $(CFLAGS) $(LDFLAGS) 
  
-$(SDIR)/%.o: %.c
+$(SDIR)/%.o: %.cpp
 	$(CC) -c -MMD -MP $< -o $@ $(CFLAGS) $(LDFLAGS)
 
 clean:

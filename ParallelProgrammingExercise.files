@@ -14,3 +14,11 @@ assignment2/histogram_ref.h
 assignment2/histogram_seq.c
 assignment2/main.c
 assignment2/unit_test.c
+assignment3/student/histogram_par.cpp
+assignment3/histogram.cpp
+assignment3/histogram.h
+assignment3/histogram_ref.cpp
+assignment3/histogram_ref.h
+assignment3/histogram_seq.cpp
+assignment3/main.cpp
+assignment3/unit_test.c
