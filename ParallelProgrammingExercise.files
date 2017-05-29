@@ -22,3 +22,9 @@ assignment3/histogram_ref.h
 assignment3/histogram_seq.cpp
 assignment3/main.cpp
 assignment3/unit_test.c
+assignment4/student/mandelbrot_set_par.c
+assignment4/main.c
+assignment4/unit_test.c
+assignment4/mandelbrot_set.c
+assignment4/mandelbrot_set.h
+assignment4/mandelbrot_set_seq.c
