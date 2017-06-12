@@ -20,8 +20,10 @@ void mandelbrot_draw(int x_resolution, int y_resolution, int max_iter,
 
 	int k;
 
+#pragma omp parallel for  private ( x, y, Z, C, k ) schedule(dynamic)
 	for (int i = 0; i < y_resolution; i++)
 	{
+#pragma omp parallel for
 		for (int j = 0; j < x_resolution; j++)
 		{
 			y = view_y1 - i * y_stepsize;
