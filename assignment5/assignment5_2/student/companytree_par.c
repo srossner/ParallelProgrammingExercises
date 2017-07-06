@@ -32,16 +32,21 @@ int compute_workHours_my(int data)
 
 void traverse(tree *node, int numThreads){
 
+    // the magic hapans here !!!
+
+}
+
+void traverse_paralel(tree* node )
+{
+
     if(node != NULL){
 
         tree *right = node->right;
         tree *left = node->left;
 
-        #pragma omp task shared(right, numThreads)
-        traverse(right, numThreads);
-
-        #pragma omp task shared(left, numThreads)
-        traverse(left, numThreads);
+        #pragma omp task
+        traverse_paralel(right);
+        traverse_paralel(left);
 
         top_work_hours[node->id] = compute_workHours_my(node->data);
 
