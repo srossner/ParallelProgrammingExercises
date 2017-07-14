@@ -10,6 +10,7 @@
 
 int main(int argc, char** argv)
 {
+
     int np, rank;
 
     MPI_Init(&argc, &argv);
