@@ -1,5 +1,6 @@
 #include "companytree.h"
 #include <math.h>
+#include <omp.h>
 
 
 int is_prime_my(int n)
@@ -18,6 +19,7 @@ int is_prime_my(int n)
   return flag;
 }
 
+#define MAX_NESTING_LEVEL 8
 
 int compute_workHours_my(int data)
 {
@@ -32,24 +34,36 @@ int compute_workHours_my(int data)
   return (70 + (sum % 100)*(sum % 100)*(sum % 100)*(sum % 100)/1000000)*10;
 }
 
-
-void traverse(tree *node, int numThreads){
-
+void traverse_section(tree *node){
 
     if(node != NULL){
-    #pragma omp parallel sections shared(node, numThreads)
-        {
+    #pragma omp parallel sections shared(node)
+    {
 
-            #pragma omp section
-            traverse(node->right, numThreads);
+        #pragma omp section
+        traverse_section(node->right);
 
-            #pragma omp section
-            traverse(node->left, numThreads);
+        #pragma omp section
+        traverse_section(node->left);
 
-        }
+    }
 
         top_work_hours[node->id] = compute_workHours_my(node->data);
 
     }
 }
+
+
+
+void traverse(tree *node, int numThreads){
+
+    omp_set_num_threads( numThreads );
+    //omp_set_nested( 1 );
+    omp_set_max_active_levels( MAX_NESTING_LEVEL );
+
+    traverse_section(node);
+}
+
+
+
 
